@@ -1,7 +1,11 @@
 {
   "name": "timepicker",
   "version": "0.0.0",
+  "type": "module",
   "private": true,
+  "engines": {
+    "npm": ">=10.2.5"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -9,7 +13,9 @@
   },
   "dependencies": {
     "vue": "^3.3.11",
-    "@vuepic/vue-datepicker": "^7.4.0"
+    "@vuepic/vue-datepicker": "^7.4.0",
+    "vue-router": "^4.2.5",
+    "vuetify": "^3.4.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
