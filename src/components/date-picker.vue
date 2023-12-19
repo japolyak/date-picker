@@ -1,11 +1,10 @@
 <template>
     <div class="px-4 pt-4">
-        <vue-date-picker v-model="date" name="blya" range  />
+        <vue-date-picker v-model="date" />
         {{ $telegramWebApp.initDataUnsafe?.user?.id }}
         {{ privateCourseId }}
         <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details />
         <template v-if="setAssignment">
-
             <v-switch v-model="includeH1" label="Hurra 1" color="primary" hide-details />
             <v-textarea v-if="includeH1" v-model="setH1" variant="outlined" hide-details auto-grow rows="1" />
 
@@ -24,7 +23,7 @@
             <v-switch v-model="includeMT" label="Megatest" color="primary" hide-details />
             <v-textarea v-if="includeMT" v-model="setMT" variant="outlined" hide-details auto-grow rows="1" />
 
-            <v-switch v-model="includeAnother" label="Hurra 1" color="primary" hide-details />
+            <v-switch v-model="includeAnother" label="Dodatkowe" color="primary" hide-details />
             <v-textarea v-if="includeAnother" v-model="setAnother" variant="outlined" hide-details auto-grow rows="1" />
 
         </template>
