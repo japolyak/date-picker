@@ -1,7 +1,7 @@
 <template>
     <div>
         <vue-date-picker v-model="date" />
-        {{ telegramWebApp.initDataUnsafe }}
+        {{ telegramWebApp.initDataUnsafe?.user?.id }}
     </div>
 </template>
 
