@@ -84,13 +84,12 @@ function planNewClass() {
             assignment: 'asd',
         }]
     };
-    console.log('asdad')
+
     const request = ApplicationClient.planNewClass(privateCourseId.value, a);
 }
 
 onMounted(() => {
     telegramWebApp.MainButton.isVisible = true;
-    telegramWebApp.MainButton.isActive = true;
 });
 
 watch()
