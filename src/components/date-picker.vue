@@ -4,6 +4,7 @@
 
         <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details />
         <template v-if="setAssignment">
+            {{ test }}
             <v-switch v-model="includeH1" label="Hurra 1" color="primary" hide-details />
             <v-textarea v-if="includeH1" v-model="setH1" variant="outlined" hide-details auto-grow rows="1" />
 
@@ -37,6 +38,7 @@ import { ApplicationClient } from '@/services/api/application-client';
 import type { SourceDto, NewClassDto } from '@/services/api/api.models';
 
 const date = ref();
+const test = ref('test');
 
 // Assignment
 const setAssignment = ref(false);
@@ -68,7 +70,7 @@ const privateCourseId = computed(() => {
 watchEffect(() => {
     if (telegramWebApp) {
         telegramWebApp.MainButton.onClick = () => {
-            console.log('Hello from Vite!');
+            test.value = 'MainButtonClicked';
         };
     }
 });
