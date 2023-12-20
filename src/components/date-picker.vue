@@ -67,6 +67,7 @@ const privateCourseId = computed(() => {
 onMounted(() => {
     console.log(telegramWebApp.initDataUnsafe);
     console.log(privateCourseId.value);
+    telegramWebApp.MainButton.isVisible = true;
 });
 </script>
 
