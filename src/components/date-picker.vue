@@ -1,8 +1,7 @@
 <template>
     <div class="px-4 pt-4">
         <vue-date-picker v-model="date" />
-        {{ $telegramWebApp.initDataUnsafe?.user?.id }}
-        {{ privateCourseId }}
+
         <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details />
         <template v-if="setAssignment">
             <v-switch v-model="includeH1" label="Hurra 1" color="primary" hide-details />
@@ -25,15 +24,17 @@
 
             <v-switch v-model="includeAnother" label="Dodatkowe" color="primary" hide-details />
             <v-textarea v-if="includeAnother" v-model="setAnother" variant="outlined" hide-details auto-grow rows="1" />
-
+            <v-btn color="primary" @click="planNewClass()">Plan</v-btn>
         </template>
     </div>
 </template>
 
 <script setup lang="ts">
 import VueDatePicker from '@vuepic/vue-datepicker'
-import { ref, onMounted, inject, computed } from 'vue';
+import { ref, onMounted, inject, computed, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
+import { ApplicationClient } from '@/services/api/application-client';
+import type { SourceDto, NewClassDto } from '@/services/api/api.models';
 
 const date = ref();
 
@@ -64,9 +65,28 @@ const privateCourseId = computed(() => {
   return isNaN(privateCourseId) ? null : privateCourseId;
 });
 
+watchEffect(() => {
+    if (telegramWebApp) {
+        telegramWebApp.MainButton.onClick = () => {
+            console.log('Hello from Vite!');
+        };
+    }
+});
+
+function planNewClass() {
+    if (privateCourseId.value === null) return;
+    const a: NewClassDto = {
+        date: "asdadsa",
+        sources: [{
+            title: 'asd',
+            assignment: 'asd',
+        }]
+    };
+    console.log('asdad')
+    const request = ApplicationClient.planNewClass(privateCourseId.value, a);
+}
+
 onMounted(() => {
-    console.log(telegramWebApp.initDataUnsafe);
-    console.log(privateCourseId.value);
     telegramWebApp.MainButton.isVisible = true;
 });
 </script>

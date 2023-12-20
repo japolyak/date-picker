@@ -15,7 +15,9 @@
     "vue": "^3.3.11",
     "@vuepic/vue-datepicker": "^7.4.0",
     "vue-router": "^4.2.5",
-    "vuetify": "^3.4.8"
+    "vuetify": "^3.4.8",
+    "ky": "^1.1.3",
+    "@mdi/font": "^7.2.96"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
