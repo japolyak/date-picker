@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import VueDatePicker from '@vuepic/vue-datepicker'
-import { ref, onMounted, inject, computed, watchEffect } from 'vue';
+import { ref, onMounted, inject, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { ApplicationClient } from '@/services/api/application-client';
 import type { SourceDto, NewClassDto } from '@/services/api/api.models';
@@ -90,7 +90,10 @@ function planNewClass() {
 
 onMounted(() => {
     telegramWebApp.MainButton.isVisible = true;
+    telegramWebApp.MainButton.isActive = true;
 });
+
+watch()
 </script>
 
 <style scoped>
