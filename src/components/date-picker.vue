@@ -86,7 +86,7 @@ watch(date, (newValue, oldValue) => {
 });
 
 onMounted(() => {
-    applicationTheme.value = telegramWebApp.themeParams.secondary_bg_color === '#1c1c1d' ? '#f1f1f1' : '#1c1c1d';
+    applicationTheme.value = telegramWebApp.themeParams.secondary_bg_color === '#1c1c1d' ? 'dark' : 'bright';
     test.value = applicationTheme.value;
 });
 </script>
