@@ -73,6 +73,7 @@ const elementTheme = computed(() => applicationTheme.value === 'dark' ? 'dark-th
 const textareaBgColor = computed(() => applicationTheme.value === 'dark' ? '#f1f1f1' : '');
 const setTelegramMainButtonState = () => {
     if (date.value && !telegramWebApp.MainButton.isActive) {
+        console.log('activate button');
         telegramWebApp.MainButton.text = 'Plan class';
         telegramWebApp.MainButton.enable();
         telegramWebApp.MainButton.show();
@@ -80,11 +81,13 @@ const setTelegramMainButtonState = () => {
     }
 
     if (date.value && !telegramWebApp.MainButton.isVisible) {
+        console.log('show button');
         telegramWebApp.MainButton.show();
         return;
     }
 
     if (!date.value && telegramWebApp.MainButton.isVisible) {
+        console.log('hide button');
         telegramWebApp.MainButton.hide();
         return;
     }
