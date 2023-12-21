@@ -91,6 +91,7 @@ function planNewClass() {
 onMounted(() => {
     telegramWebApp.MainButton.text = 'Plan class';
     telegramWebApp.MainButton.enable();
+    telegramWebApp.MainButton.show();
 });
 
 watch()
