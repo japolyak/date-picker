@@ -69,13 +69,11 @@ const privateCourseId = computed(() => {
 
 const testFn = () => {
     test.value = 'test2';
+    telegramWebApp.offEvent('mainButtonClicked', () => {});
 };
 
 watchEffect(() => {
     telegramWebApp.onEvent('mainButtonClicked', testFn);
-    return () => {
-        telegramWebApp.offEvent('mainButtonClicked', testFn);
-    };
 });
 
 function planNewClass() {
