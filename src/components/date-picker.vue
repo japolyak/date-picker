@@ -2,10 +2,13 @@
     <div class="px-4 pt-4">
         <vue-date-picker v-model="date" />
 
-        <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details :class="elementTheme" />
+        <div class="d-flex justify-start">
+            <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details :class="elementTheme" />
+        </div>
         <template v-if="setAssignment">
             <div style="color: red">
                 {{ test }}
+                {{ test1 }}
             </div>
             <div v-for="(item, index) in items" :key="index">
                 <v-switch v-model="item.include" :label="item.title" color="primary" hide-details :class="elementTheme" />
@@ -21,6 +24,7 @@ import { ref, onMounted, inject, computed, watchEffect, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { ApplicationClient } from '@/services/api/application-client';
 import type { SourceDto, NewClassDto } from '@/services/api/api.models';
+import {red} from "vuetify/util/colors";
 
 interface Item {
     title: string;
@@ -30,8 +34,8 @@ interface Item {
 
 const date = ref<Date>(null);
 const test = ref();
+const test1 = ref();
 const applicationTheme = ref<string | null>(null);
-const elementTheme = computed(() => applicationTheme.value === 'dark' ? 'dark-theme' : 'bright-theme');
 
 // Assignment
 const setAssignment = ref(false);
@@ -47,6 +51,8 @@ const items = ref<Array<Item>>([
 
 const route = useRoute();
 const telegramWebApp = inject('telegramWebApp');
+
+const elementTheme = computed(() => applicationTheme.value === 'dark' ? 'dark-theme' : 'bright-theme');
 
 const privateCourseId = computed(() => {
   if (Array.isArray(route.params.privateCourseId)) return null;
@@ -89,6 +95,8 @@ watch(date, (newValue, oldValue) => {
 onMounted(() => {
     applicationTheme.value = telegramWebApp.themeParams.secondary_bg_color === '#1d1c1c' ? 'dark' : 'bright';
     test.value = applicationTheme.value;
+    test1.value = telegramWebApp.themeParams.secondary_bg_color;
+
 });
 </script>
 
