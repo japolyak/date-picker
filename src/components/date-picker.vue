@@ -12,7 +12,15 @@
             </div>
             <div v-for="(item, index) in items" :key="index">
                 <v-switch v-model="item.include" :label="item.title" color="primary" hide-details :class="elementTheme" />
-                <v-textarea v-if="item.include" v-model="item.value" variant="outlined" hide-details auto-grow rows="1" />
+                <v-textarea
+                    v-if="item.include"
+                    v-model="item.value"
+                    variant="outlined"
+                    hide-details
+                    rows="1"
+                    :bg-color="textareaBgColor"
+                    auto-grow
+                />
             </div>
         </template>
     </div>
@@ -24,7 +32,6 @@ import { ref, onMounted, inject, computed, watchEffect, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { ApplicationClient } from '@/services/api/application-client';
 import type { SourceDto, NewClassDto } from '@/services/api/api.models';
-import {red} from "vuetify/util/colors";
 
 interface Item {
     title: string;
@@ -53,6 +60,7 @@ const route = useRoute();
 const telegramWebApp = inject('telegramWebApp');
 
 const elementTheme = computed(() => applicationTheme.value === 'dark' ? 'dark-theme' : 'bright-theme');
+const textareaBgColor = computed(() => applicationTheme.value === 'dark' ? '#f1f1f1' : '#1c1c1d');
 
 const privateCourseId = computed(() => {
   if (Array.isArray(route.params.privateCourseId)) return null;
