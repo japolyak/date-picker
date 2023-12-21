@@ -71,21 +71,10 @@ const telegramWebApp = inject('telegramWebApp');
 
 const elementTheme = computed(() => applicationTheme.value === 'dark' ? 'dark-theme' : 'bright-theme');
 const textareaBgColor = computed(() => applicationTheme.value === 'dark' ? '#f1f1f1' : '');
-const setTelegramMainButtonState = () => {
-    if (date.value && telegramWebApp.MainButton.isVisible) return;
-
-    if (date.value && !telegramWebApp.MainButton.isVisible) {
-        console.log('activate button');
-        telegramWebApp.MainButton.text = 'Plan class';
-        telegramWebApp.MainButton.show();
-        return;
-    }
-
-    if (!date.value && telegramWebApp.MainButton.isVisible) {
-        console.log('hide button');
-        telegramWebApp.MainButton.hide();
-        return;
-    }
+const setTelegramMainButtonState = (): void => {
+    date.value
+        ? (telegramWebApp.MainButton.isVisible ? null : telegramWebApp.MainButton.show())
+        : telegramWebApp.MainButton.hide();
 };
 
 const privateCourseId = computed(() => {
@@ -116,6 +105,7 @@ function planNewClass() {
 }
 
 onMounted(() => {
+    telegramWebApp.MainButton.text = 'Plan class';
     applicationTheme.value = telegramWebApp.themeParams.secondary_bg_color === '#1c1c1d' ? 'dark' : 'bright';
 });
 </script>
