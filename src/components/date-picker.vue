@@ -3,7 +3,7 @@
         <vue-date-picker v-model="date" @update:model-value="setTelegramMainButtonState" />
 
         <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details :class="elementTheme" />
-        {{ test }}
+        <div style="color: red">{{ test }}</div>
         <template v-if="setAssignment">
             <div v-for="(item, index) in items" :key="index">
                 <v-switch
