@@ -67,12 +67,8 @@ const privateCourseId = computed(() => {
   return isNaN(privateCourseId) ? null : privateCourseId;
 });
 
-const testFn1 = () => {
-    test.value = 'test3';
-};
 const testFn = () => {
     test.value = 'test2';
-    telegramWebApp.offEvent('mainButtonClicked', testFn1);
 };
 
 watchEffect(() => {
@@ -93,7 +89,8 @@ function planNewClass() {
 }
 
 onMounted(() => {
-    telegramWebApp.MainButton.isVisible = true;
+    telegramWebApp.MainButton.text = 'Plan class';
+    telegramWebApp.MainButton.enable();
 });
 
 watch()
