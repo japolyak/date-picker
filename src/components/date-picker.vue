@@ -2,14 +2,9 @@
     <div class="px-4 pt-4">
         <vue-date-picker v-model="date" @update:model-value="setTelegramMainButtonState" />
 
-        <div class="d-flex justify-start">
-            <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details :class="elementTheme" />
-        </div>
+        <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details :class="elementTheme" />
+
         <template v-if="setAssignment">
-            <div style="color: red">
-                {{ test }}
-                {{ test1 }}
-            </div>
             <div v-for="(item, index) in items" :key="index">
                 <v-switch
                     v-model="item.include"
@@ -50,8 +45,6 @@ interface Item {
 }
 
 const date = ref<Date>(null);
-const test = ref();
-const test1 = ref();
 const applicationTheme = ref<string | null>(null);
 
 // Assignment
@@ -71,11 +64,6 @@ const telegramWebApp = inject('telegramWebApp');
 
 const elementTheme = computed(() => applicationTheme.value === 'dark' ? 'dark-theme' : 'bright-theme');
 const textareaBgColor = computed(() => applicationTheme.value === 'dark' ? '#f1f1f1' : '');
-const setTelegramMainButtonState = (): void => {
-    date.value
-        ? (telegramWebApp.MainButton.isVisible ? null : telegramWebApp.MainButton.show())
-        : telegramWebApp.MainButton.hide();
-};
 
 const privateCourseId = computed(() => {
   if (Array.isArray(route.params.privateCourseId)) return null;
@@ -84,11 +72,18 @@ const privateCourseId = computed(() => {
   return isNaN(privateCourseId) ? null : privateCourseId;
 });
 
-watchEffect(() => {
-    telegramWebApp.onEvent('mainButtonClicked', planNewClass);
-});
+const setTelegramMainButtonState = (): void => {
+    if (date.value) {
+        if (telegramWebApp.MainButton.isVisible) return;
 
-function planNewClass() {
+        telegramWebApp.MainButton.show();
+        return;
+    }
+
+    telegramWebApp.MainButton.hide();
+};
+
+const planNewClass = (): void => {
     if (privateCourseId.value == null || date.value == null || items.value == null) return;
 
     const sources: SourceDto[] = items.value.map((item) => {
@@ -102,7 +97,9 @@ function planNewClass() {
     };
 
     const request = ApplicationClient.planNewClass(privateCourseId.value, payload);
-}
+};
+
+watchEffect(() => telegramWebApp.onEvent('mainButtonClicked', planNewClass));
 
 onMounted(() => {
     telegramWebApp.MainButton.text = 'Plan class';
