@@ -67,12 +67,12 @@ const privateCourseId = computed(() => {
   return isNaN(privateCourseId) ? null : privateCourseId;
 });
 
+const memoizedCallback = ref(() => {
+    test.value = 'test2';
+});
+
 watchEffect(() => {
-    if (telegramWebApp) {
-        telegramWebApp.MainButton.onClick = () => {
-            test.value = 'MainButtonClicked';
-        };
-    }
+    telegramWebApp.onEvent('mainButtonClicked', memoizedCallback.value)
 });
 
 function planNewClass() {
