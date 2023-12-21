@@ -86,17 +86,18 @@ const setTelegramMainButtonState = (): void => {
 const planNewClass = (): void => {
     if (privateCourseId.value == null || date.value == null || items.value == null) return;
 
-    const sources: SourceDto[] = items.value.map((item) => {
-        if (item.include && item.value) return { title: item.title, assignment: item.value };
-        return null;
-    }).filter((item) => item != null);
-
     const payload: NewClassDto = {
         date: "someDate",
-        sources: [...sources]
+        sources: []
     };
 
-    const request = ApplicationClient.planNewClass(privateCourseId.value, payload);
+    if (setAssignment.value) {
+        payload.sources = items.value
+            .filter((item: Item) => item.include && item.value)
+            .map((item: Item) => ({ title: item.title, assignment: item.value }));
+    }
+
+    ApplicationClient.planNewClass(privateCourseId.value, payload);
 };
 
 watchEffect(() => telegramWebApp.onEvent('mainButtonClicked', planNewClass));
