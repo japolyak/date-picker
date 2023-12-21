@@ -79,7 +79,7 @@ watchEffect(() => {
 function planNewClass() {
     console.log('request');
     if (privateCourseId.value == null || date.value == null || items.value == null) return;
-    const sources: SourceDto[] = items.value.map((item) => {
+    const sources = items.value.map((item) => {
         if (item.include && item.value) return { title: item.title, assignment: item.value};
     });
 
