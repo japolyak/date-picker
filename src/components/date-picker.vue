@@ -60,7 +60,7 @@ const route = useRoute();
 const telegramWebApp = inject('telegramWebApp');
 
 const elementTheme = computed(() => applicationTheme.value === 'dark' ? 'dark-theme' : 'bright-theme');
-const textareaBgColor = computed(() => applicationTheme.value === 'dark' ? '#f1f1f1' : '#1c1c1d');
+const textareaBgColor = computed(() => applicationTheme.value === 'dark' ? '#f1f1f1' : '');
 
 const privateCourseId = computed(() => {
   if (Array.isArray(route.params.privateCourseId)) return null;
