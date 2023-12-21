@@ -30,6 +30,7 @@ interface Item {
 
 const date = ref<Date>(null);
 const test = ref();
+const applicationTheme = ref<string | null>(null);
 
 // Assignment
 const setAssignment = ref(false);
@@ -85,7 +86,8 @@ watch(date, (newValue, oldValue) => {
 });
 
 onMounted(() => {
-    test.value = telegramWebApp.themeParams;
+    applicationTheme.value = telegramWebApp.themeParams.secondary_bg_color === '#1c1c1d' ? '#f1f1f1' : '#1c1c1d';
+    test.value = applicationTheme.value;
 });
 </script>
 
