@@ -61,6 +61,9 @@ const telegramWebApp = inject('telegramWebApp');
 
 const elementTheme = computed(() => applicationTheme.value === 'dark' ? 'dark-theme' : 'bright-theme');
 const textareaBgColor = computed(() => applicationTheme.value === 'dark' ? '#f1f1f1' : '');
+const telegramMainButtonState = () => {
+
+};
 
 const privateCourseId = computed(() => {
   if (Array.isArray(route.params.privateCourseId)) return null;
@@ -80,13 +83,14 @@ function planNewClass() {
         if (item.include && item.value) return { title: item.title, assignment: item.value};
     });
 
-    const a: NewClassDto = {
+    const payload: NewClassDto = {
         date: "asdadsa",
         sources: [...sources]
     };
 
     test.value = 'testRequest';
-    const request = ApplicationClient.planNewClass(privateCourseId.value, a);
+    conosle.log(payload);
+    const request = ApplicationClient.planNewClass(privateCourseId.value, payload);
 }
 
 watch(date, (newValue, oldValue) => {
