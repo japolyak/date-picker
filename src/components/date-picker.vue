@@ -3,7 +3,7 @@
         <vue-date-picker v-model="date" @update:model-value="setTelegramMainButtonState" />
 
         <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details :class="elementTheme" />
-
+        {{ test }}
         <template v-if="setAssignment">
             <div v-for="(item, index) in items" :key="index">
                 <v-switch
@@ -46,6 +46,7 @@ interface Item {
 
 const date = ref<Date>(null);
 const applicationTheme = ref<string | null>(null);
+const test = ref('aaa');
 
 // Assignment
 const setAssignment = ref(false);
@@ -84,6 +85,7 @@ const setTelegramMainButtonState = (): void => {
 };
 
 const planNewClass = (): void => {
+    test.value = 'start request';
     if (privateCourseId.value == null || date.value == null || items.value == null) return;
 
     const payload: NewClassDto = {
@@ -96,8 +98,9 @@ const planNewClass = (): void => {
             .filter((item: Item) => item.include && item.value)
             .map((item: Item) => ({ title: item.title, assignment: item.value }));
     }
-
+    test.value = 'before request';
     ApplicationClient.planNewClass(privateCourseId.value, payload);
+    test.value = 'after request';
 };
 
 watchEffect(() => telegramWebApp.onEvent('mainButtonClicked', planNewClass));
