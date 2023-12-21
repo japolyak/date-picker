@@ -71,8 +71,12 @@ const memoizedCallback = ref(() => {
     test.value = 'test2';
 });
 
+const testFn = () => {
+    test.value = 'test2';
+};
+
 watchEffect(() => {
-    telegramWebApp.onEvent('mainButtonClicked', memoizedCallback.value)
+    telegramWebApp.onEvent('mainButtonClicked', testFn)
 });
 
 function planNewClass() {
