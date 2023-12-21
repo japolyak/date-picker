@@ -95,7 +95,7 @@ onMounted(() => {
 <style lang="scss">
 .dark-theme {
     .v-label {
-        color: #f1f1f1;
+        color: #1d1c1c;
     }
 }
 
