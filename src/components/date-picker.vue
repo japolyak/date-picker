@@ -27,7 +27,7 @@ interface Item {
 }
 
 const date = ref<Date>(null);
-const test = ref('test');
+const test = ref();
 
 // Assignment
 const setAssignment = ref(false);
@@ -80,6 +80,10 @@ watch(date, (newValue, oldValue) => {
         telegramWebApp.MainButton.enable();
         telegramWebApp.MainButton.show();
     }
+});
+
+onMounted(() => {
+    test.value = telegramWebApp.themeParams;
 });
 </script>
 
