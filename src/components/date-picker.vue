@@ -36,7 +36,7 @@ import VueDatePicker from '@vuepic/vue-datepicker'
 import { ref, onMounted, inject, computed, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import { ApplicationClient } from '@/services/api/application-client';
-import type { SourceDto, NewClassDto } from '@/services/api/api.models';
+import type { NewClassDto } from '@/services/api/api.models';
 
 interface Item {
     title: string;
