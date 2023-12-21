@@ -4,7 +4,9 @@
 
         <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details />
         <template v-if="setAssignment">
-            {{ test }}
+            <div style="color: red">
+                {{ test }}
+            </div>
             <div v-for="(item, index) in items" :key="index">
                 <v-switch v-model="item.include" :label="item.title" color="primary" hide-details />
                 <v-textarea v-if="item.include" v-model="item.value" variant="outlined" hide-details auto-grow rows="1" />
