@@ -67,9 +67,12 @@ const privateCourseId = computed(() => {
   return isNaN(privateCourseId) ? null : privateCourseId;
 });
 
+const testFn1 = () => {
+    test.value = 'test3';
+};
 const testFn = () => {
     test.value = 'test2';
-    telegramWebApp.offEvent('mainButtonClicked', () => {});
+    telegramWebApp.offEvent('mainButtonClicked', testFn1);
 };
 
 watchEffect(() => {
