@@ -2,7 +2,7 @@
     <div class="px-4 pt-4">
         <vue-date-picker v-model="date" />
 
-        <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details />
+        <v-switch v-model="setAssignment" label="Set assignment" hide-details :class="elementTheme" />
         <template v-if="setAssignment">
             <div style="color: red">
                 {{ test }}
@@ -31,6 +31,7 @@ interface Item {
 const date = ref<Date>(null);
 const test = ref();
 const applicationTheme = ref<string | null>(null);
+const elementTheme = computed(() => applicationTheme.value === 'dark' ? 'dark-theme' : 'bright-theme');
 
 // Assignment
 const setAssignment = ref(false);
@@ -86,11 +87,21 @@ watch(date, (newValue, oldValue) => {
 });
 
 onMounted(() => {
-    applicationTheme.value = telegramWebApp.themeParams.secondary_bg_color === '#1c1c1d' ? 'dark' : 'bright';
+    applicationTheme.value = telegramWebApp.themeParams.secondary_bg_color === '#1d1c1c' ? 'dark' : 'bright';
     test.value = applicationTheme.value;
 });
 </script>
 
-<style scoped>
+<style lang="scss">
+.dark-theme {
+    .v-label {
+        color: #f1f1f1;
+    }
+}
 
+.bright-theme {
+    .v-label {
+        color: #1d1c1c;
+    }
+}
 </style>
