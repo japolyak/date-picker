@@ -1,5 +1,5 @@
 <template>
-    <div class="px-4 pt-4">
+    <div v-if="activeForm" class="px-4 pt-4">
         <vue-date-picker v-model="date" @update:model-value="setTelegramMainButtonState" />
 
         <v-switch v-model="setAssignment" label="Set assignment" color="primary" hide-details :class="elementTheme" />
@@ -45,6 +45,7 @@ interface Item {
 }
 
 const date = ref<Date>(null);
+const activeForm = ref(true);
 const applicationTheme = ref<string | null>(null);
 
 // Assignment
@@ -97,7 +98,11 @@ const planNewClass = (): void => {
             .map((item: Item) => ({ title: item.title, assignment: item.value }));
     }
     const request = ApplicationClient.planNewClass(privateCourseId.value, payload);
-    console.log(request);
+
+    activeForm.value = false;
+    telegramWebApp.MainButton.hide();
+    date.value = null;
+    setAssignment.value = false;
 };
 
 watchEffect(() => telegramWebApp.onEvent('mainButtonClicked', planNewClass));
