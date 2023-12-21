@@ -101,7 +101,7 @@ onMounted(() => {
 
 .bright-theme {
     .v-label {
-        color: #1d1c1c;
+        color: #f1f1f1;
     }
 }
 </style>
